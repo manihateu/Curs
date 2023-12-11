@@ -1,0 +1,3 @@
+//apis
+
+export default () => {}
