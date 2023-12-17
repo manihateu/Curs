@@ -24,4 +24,7 @@ export class  CreateDocumentDto {
     @IsNotEmpty()
     @IsDate()
     entryDate: Date;
+
+    @IsString()
+    subscriberName?: string
 }

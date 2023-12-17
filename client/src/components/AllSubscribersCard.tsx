@@ -68,14 +68,14 @@ const AllSubscribersCard = () => {
 
                 </button>
             </div>
-            {subscribers != null && subscribers && subscribers.length != 0 ? 
+            {subscribers != null && subscribers && subscribers.length != 0 && Array.isArray(subscribers) && subscribers.length != 0 ? 
                 subscribers.map((subscriber) => 
                     <div className="w-full mt-5 p-3 shadow-xl cursor-pointer hover:bg-gray-400 rounded-xl">
                         <p className="font-mono">Ключ - {subscriber.id}</p>
                         <p className="font-mono">ФИО - {subscriber.name}</p>
                         <p className="font-mono">Отдел - {subscriber.department}</p>
                         <p className="font-mono">Телефон - {subscriber.phone}</p>
-                        <p className="font-mono">Дата получения - {subscriber.receivedDate.toString()}</p>
+                        <p className="font-mono">Дата получения - {subscriber.receivedDate.toString().split('T')[0]}</p>
                         <button onClick={async () => {await deleteSub(subscriber.id)}} className="rounded-lg mt-3 font-medium bg-red-100 text-red-500 px-6 py-3">
                             Удалить
                         </button>
@@ -89,13 +89,13 @@ const AllSubscribersCard = () => {
             <div className="w-full h-full p-3">
                 <p className="text-xl font-bold">Добавить абонента</p>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <input {...register("shelf", {required: true, maxLength: 80})} type="text"  placeholder="Стеллаж" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
-                    <input {...register("shelfNumber", {required: true, maxLength: 80})} type="number"  placeholder="Полка" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
-                    <input {...register("cell", {required: true})} type="number"  placeholder="Ячейка" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
-                    <input {...register("cellCode", {required: true, maxLength: 80})} type="text"  placeholder="Код ячейки" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
-                    <input {...register("filling", {required: true, maxLength: 80})} type="text"  placeholder="Заполнение" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
+                    <input {...register("name", {required: true, maxLength: 80})} type="text"  placeholder="Имя" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
+                    <input {...register("department", {required: true, maxLength: 80})} type="text"  placeholder="Отдел" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
+                    <input {...register("phone", {required: true})} type="tel"  placeholder="Телефон" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
+                    <input {...register("receivedDate", {required: true, maxLength: 80})} type="date"  placeholder="Дата получения" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
+                    <input {...register("subscriberName", {required: true, maxLength: 80})} type="text"  placeholder="Имя прикрепленного абонента" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <button type='submit' className="rounded-lg font-medium bg-blue-100 text-blue-500 px-6 py-3">
-                    Добавить
+                        Добавить
                     </button>
                 </form>
             </div>

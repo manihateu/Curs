@@ -65,7 +65,7 @@ const AllArchivesCard = () => {
 
                 </button>
             </div>
-            {archives != null && archives ? 
+            {archives != null && archives && Array.isArray(archives) && archives.length != 0 ? 
                 archives.map((archive) => 
                     <div className="w-full mt-5 p-3 shadow-xl cursor-pointer hover:bg-gray-400 rounded-xl">
                         <p className="font-mono">Ключ - {archive.id}</p>

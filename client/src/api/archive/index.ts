@@ -15,6 +15,7 @@ export const getAllArchives = async () => {
         const {data} = await $host.get('archives/')
         return data
     } catch (error) {
+        console.log(error)
         return null
     }
 }

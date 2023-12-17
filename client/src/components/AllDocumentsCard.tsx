@@ -68,7 +68,7 @@ const AllDocumentsCard = () => {
 
                 </button>
             </div>
-            {documents != null && documents ? 
+            {documents != null && documents && Array.isArray(documents) && documents.length != 0 ?
                 documents.map((document) => 
                     <div className="w-full mt-5 p-3 shadow-xl cursor-pointer hover:bg-gray-400 rounded-xl">
                         <p className="font-mono">Ключ - {document.id}</p>
@@ -95,6 +95,7 @@ const AllDocumentsCard = () => {
                     <input {...register("quantity", {required: true, maxLength: 80})} type="text"  placeholder="Код ячейки" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <input {...register("cellCode", {required: true, maxLength: 80})} type="number"  placeholder="Количество" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <input {...register("entryDate", {required: true, maxLength: 80})} type="date"  placeholder="Дата поступления" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
+                    <input {...register("cellCode", {required: true, maxLength: 80})} type="text"  placeholder="Код ячейки архива" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <button type='submit' className="rounded-lg font-medium bg-blue-100 text-blue-500 px-6 py-3">
                       Добавить
                     </button>
