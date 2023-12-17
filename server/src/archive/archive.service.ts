@@ -2,12 +2,14 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Archive } from '../entities/archive.entity';
+import { Document } from 'src/entities/document.entity';
 
 @Injectable()
 export class ArchiveService {
   constructor(
     @InjectRepository(Archive)
     private archiveRepository: Repository<Archive>,
+
   ) {}
 
   async createArchiveRecord({shelf, shelfNumber, cell, cellCode, filling}): Promise<Archive> {
@@ -16,7 +18,8 @@ export class ArchiveService {
   }
 
   async getAllArchiveRecords(): Promise<Archive[]> {
-    return this.archiveRepository.find();
+
+    return await this.archiveRepository.find();
   }
 
   async getArchiveRecordByCellCode(cellCode: string): Promise<Archive> {

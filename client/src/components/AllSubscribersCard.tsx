@@ -29,8 +29,8 @@ const AllSubscribersCard = () => {
     useEffect(() => {
         const getData = async() => {
             try {
-                await getSubscribers().then((data) => setSubscribers(data))
                 setLoading(true)
+                await getSubscribers().then((data) => setSubscribers(data))
             } finally {
                 setLoading(false)
             }

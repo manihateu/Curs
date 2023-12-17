@@ -29,8 +29,8 @@ const AllDocumentsCard = () => {
     useEffect(() => {
         const getData = async() => {
             try {
-                await getAllDoc().then((data) => setDocuments(data))
                 setLoading(true)
+                await getAllDoc().then((data) => {setDocuments(data)})
             } finally {
                 setLoading(false)
             }

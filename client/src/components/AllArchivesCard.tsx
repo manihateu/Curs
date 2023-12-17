@@ -26,8 +26,8 @@ const AllArchivesCard = () => {
     useEffect(() => {
         const getData = async() => {
             try {
-                await getAllArchives().then((data) => setArchives(data))
                 setLoading(true)
+                await getAllArchives().then((data) => setArchives(data))
             } finally {
                 setLoading(false)
             }

@@ -9,6 +9,6 @@ export interface CreateDocumentDto {
     cellCode: string;
     quantity: number;
     entryDate: Date;
-    archive?: CreateArchiveDto;
-    subscriber?: createSubscriberDto;
+    archive: CreateArchiveDto;
+    subscriber: createSubscriberDto;
 }

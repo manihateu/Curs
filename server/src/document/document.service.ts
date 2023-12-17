@@ -18,7 +18,7 @@ export class DocumentService {
     private subscriberRepository: Repository<Subscriber>,
   ) {}
 
-  async createDocument(dto: CreateDocumentDto): Promise<CreateDocumentDto> {
+  async createDocument(dto: CreateDocumentDto): Promise<Document> {
     const selectedArchive: Archive = await this.archiveRepository.findOne({where: {id: dto.archiveId}})
     const selectedSubscriber: Subscriber = await this.subscriberRepository.findOne({where: {id: dto.subscriberId}})
     const {name,
@@ -38,7 +38,7 @@ export class DocumentService {
         subscriber: selectedSubscriber,
         archive: selectedArchive
       });
-      return this.documentRepository.save<any>(documentRecord);
+      return this.documentRepository.save<Document>(documentRecord);
     }
   }
 
