@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Document } from '../entities/document.entity';
+import { CreateDocumentDto } from './document.dto';
 
 @Injectable()
 export class DocumentService {
@@ -10,7 +11,7 @@ export class DocumentService {
     private documentRepository: Repository<Document>,
   ) {}
 
-  async createDocument(name: string, theme: string, inventoryNumber: string, cellCode: string, quantity: number, entryDate: Date): Promise<Document> {
+  async createDocument({name, theme, inventoryNumber, cellCode, quantity, entryDate}): Promise<CreateDocumentDto> {
     const documentRecord = this.documentRepository.create({ name, theme, inventoryNumber, cellCode, quantity, entryDate });
     return this.documentRepository.save(documentRecord);
   }
