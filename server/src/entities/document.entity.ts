@@ -26,7 +26,7 @@ export class Document {
   entryDate: Date;
 
   @ManyToOne(() => Archive)
-  @JoinColumn({ name: 'cellCode', referencedColumnName: 'cellCode' })
+  @JoinColumn()
   archive: Archive;
 
   @ManyToOne(() => Subscriber)

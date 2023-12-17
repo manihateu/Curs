@@ -77,7 +77,7 @@ const AllDocumentsCard = () => {
                         <p className="font-mono">Инвентарный № - {document.inventoryNumber}</p>
                         <p className="font-mono">Код ячейки - {document.cellCode}</p>
                         <p className="font-mono">Количество - {document.quantity}</p>
-                        <p className="font-mono">Дата поступления - {document.entryDate.toString()}</p>
+                        <p className="font-mono">Дата поступления - {document.entryDate.toString().split("T")[0]}</p>
                         <button onClick={async () => {await deleteDoc(document.inventoryNumber)}} className="rounded-lg mt-3 font-medium bg-red-100 text-red-500 px-6 py-3">
                             Удалить
                         </button>
@@ -93,9 +93,10 @@ const AllDocumentsCard = () => {
                     <input {...register("theme", {required: true, maxLength: 80})} type="text"  placeholder="Тема" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <input {...register("inventoryNumber", {required: true})} type="text"  placeholder="Инвентарный номер" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <input {...register("quantity", {required: true, maxLength: 80})} type="text"  placeholder="Код ячейки" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
-                    <input {...register("cellCode", {required: true, maxLength: 80})} type="number"  placeholder="Количество" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
+                    <input {...register("cellCode", {required: true, maxLength: 80})} type="text"  placeholder="Количество" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <input {...register("entryDate", {required: true, maxLength: 80})} type="date"  placeholder="Дата поступления" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
-                    <input {...register("cellCode", {required: true, maxLength: 80})} type="text"  placeholder="Код ячейки архива" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
+                    <input {...register("subscriberId", {required: true, maxLength: 80})} type="number"  placeholder="Ключ абонента" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
+                    <input {...register("archiveId", {required: true, maxLength: 80})} type="number"  placeholder="Ключ архива" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <button type='submit' className="rounded-lg font-medium bg-blue-100 text-blue-500 px-6 py-3">
                       Добавить
                     </button>

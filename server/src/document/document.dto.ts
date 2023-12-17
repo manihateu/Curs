@@ -1,4 +1,4 @@
-import { IsDate, IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsDate, IsInt, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class  CreateDocumentDto {
     @IsNotEmpty()
@@ -25,6 +25,9 @@ export class  CreateDocumentDto {
     @IsDate()
     entryDate: Date;
 
-    @IsString()
-    subscriberName?: string
+    @IsNumber()
+    subscriberId: number
+
+    @IsNumber()
+    archiveId: number
 }

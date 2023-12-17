@@ -91,7 +91,6 @@ const AllArchivesCard = () => {
                     <input {...register("shelfNumber", {required: true, maxLength: 80})} type="number"  placeholder="Полка" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <input {...register("cell", {required: true})} type="number"  placeholder="Ячейка" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <input {...register("cellCode", {required: true, maxLength: 80})} type="text"  placeholder="Код ячейки" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
-                    <input {...register("filling", {required: true, maxLength: 80})} type="text"  placeholder="Заполнение" className="my-3 p-3 rounded-xl border-0 focus:border-0"/>
                     <button type='submit' className="rounded-lg font-medium bg-blue-100 text-blue-500 px-6 py-3">
                       Добавить
                     </button>
