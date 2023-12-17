@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { createSubscriberDto } from "../api/subscribers/subscriber.dto"
-import { createSubscriber, getSubscribers } from "../api/subscribers"
+import { createSubscriber, deleteSubscriber, getSubscribers } from "../api/subscribers"
 import Modal from "./Modal"
 import { useForm } from "react-hook-form"
 
@@ -17,6 +17,13 @@ const AllSubscribersCard = () => {
 
     const handleToggleModal = () => {
         setOpenModal((open) => !open)
+    }
+
+    const deleteSub = async (id: number | undefined) => {
+        if (id) {
+            await deleteSubscriber(id)
+            location.reload()
+        }
     }
 
     useEffect(() => {
@@ -62,16 +69,18 @@ const AllSubscribersCard = () => {
                 </button>
             </div>
             {subscribers != null && subscribers && subscribers.length != 0 ? 
-                // subscribers.map((subscriber) => 
-                //     <div className="w-full mt-5 p-3 shadow-xl cursor-pointer hover:bg-gray-400 rounded-xl">
-                //         <p className="font-mono">Ключ - {subscriber.id}</p>
-                //         <p className="font-mono">ФИО - {subscriber.name}</p>
-                //         <p className="font-mono">Отдел - {subscriber.department}</p>
-                //         <p className="font-mono">Телефон - {subscriber.phone}</p>
-                //         <p className="font-mono">Дата получения - {subscriber.receivedDate.toString()}</p>
-                //     </div>
-                // ) 
-                null
+                subscribers.map((subscriber) => 
+                    <div className="w-full mt-5 p-3 shadow-xl cursor-pointer hover:bg-gray-400 rounded-xl">
+                        <p className="font-mono">Ключ - {subscriber.id}</p>
+                        <p className="font-mono">ФИО - {subscriber.name}</p>
+                        <p className="font-mono">Отдел - {subscriber.department}</p>
+                        <p className="font-mono">Телефон - {subscriber.phone}</p>
+                        <p className="font-mono">Дата получения - {subscriber.receivedDate.toString()}</p>
+                        <button onClick={async () => {await deleteSub(subscriber.id)}} className="rounded-lg mt-3 font-medium bg-red-100 text-red-500 px-6 py-3">
+                            Удалить
+                        </button>
+                    </div>
+                ) 
             : 'Абонентов не найдено'}
 
             

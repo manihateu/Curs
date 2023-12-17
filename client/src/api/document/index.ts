@@ -37,7 +37,7 @@ const update = async(inventoryNumber: string, data: Partial<CreateDocumentDto>) 
     }
 }
 
-const deleteDocument = async(inventoryNumber: string) => {
+export const deleteDocument = async(inventoryNumber: string) => {
     try {
         const res = await $host.delete(`documents/${inventoryNumber}`)
         return res.data

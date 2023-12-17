@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { createDocument, getAllDoc } from "../api/document"
+import { createDocument, deleteDocument, getAllDoc } from "../api/document"
 import { CreateDocumentDto } from "../api/document/document.dto"
 import Modal from "./Modal"
 import { useForm } from "react-hook-form"
@@ -17,6 +17,13 @@ const AllDocumentsCard = () => {
 
     const handleToggleModal = () => {
         setOpenModal((open) => !open)
+    }
+
+    const deleteDoc = async (inventoryNumber: string | undefined) => {
+        if (inventoryNumber) {
+            await deleteDocument(inventoryNumber)
+            location.reload()
+        }
     }
 
     useEffect(() => {
@@ -71,6 +78,9 @@ const AllDocumentsCard = () => {
                         <p className="font-mono">Код ячейки - {document.cellCode}</p>
                         <p className="font-mono">Количество - {document.quantity}</p>
                         <p className="font-mono">Дата поступления - {document.entryDate.toString()}</p>
+                        <button onClick={async () => {await deleteDoc(document.inventoryNumber)}} className="rounded-lg mt-3 font-medium bg-red-100 text-red-500 px-6 py-3">
+                            Удалить
+                        </button>
                     </div>
                 )
             : 'Документов не найдено'}

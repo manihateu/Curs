@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import {createArchive, getAllArchives} from '../api/archive'
+import {createArchive, deleteArchive, getAllArchives} from '../api/archive'
 import {CreateArchiveDto} from '../api/archive/archive.dto'
 import { useForm } from "react-hook-form"
 import Modal from "./Modal"
@@ -9,6 +9,11 @@ const AllArchivesCard = () => {
     const [loading, setLoading] = useState(false)
     const [openModal, setOpenModal] = useState<boolean>(false)
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const deleteArch = async(cellCode: string) => {
+        await deleteArchive(cellCode)
+        location.reload()
+    }
 
     const onSubmit = async (data: CreateArchiveDto) => {
         await createArchive(data).then(() => alert("Архив добавлен"))
@@ -69,6 +74,9 @@ const AllArchivesCard = () => {
                         <p className="font-mono">Ячейка - {archive.cell}</p>
                         <p className="font-mono">Код ячейки - {archive.cellCode}</p>
                         <p className="font-mono">Заполнение - {archive.filling}</p>
+                        <button onClick={async () => {await deleteArch(archive.cellCode)}} className="rounded-lg mt-3 font-medium bg-red-100 text-red-500 px-6 py-3">
+                            Удалить
+                        </button>
                     </div>
                 )
             : 'Архивов не найдено'}

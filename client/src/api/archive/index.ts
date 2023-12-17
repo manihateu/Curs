@@ -37,7 +37,7 @@ const update = async (cellCode: string, data: Partial<CreateArchiveDto>) => {
     }
 }
 
-const deleteArch = async (cellCode: string) => {
+export const deleteArchive = async (cellCode: string) => {
     try {
         const {data} = await $host.delete(`archives/${cellCode}`)
         return data

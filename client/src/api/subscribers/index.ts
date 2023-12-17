@@ -41,7 +41,7 @@ const updateSubscriber = async(id: number) => {
     }
 }
 
-const deleteSubscriber = async(id: number) => {
+export const deleteSubscriber = async(id: number) => {
     try{
         const res = await $host.delete(`/subscriber/${id}`)
         return res.data
