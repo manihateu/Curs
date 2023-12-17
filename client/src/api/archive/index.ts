@@ -1,7 +1,7 @@
 import { CreateArchiveDto } from './archive.dto'
 import $host from '../interceptor'
 
-const createArchive = async (dto: CreateArchiveDto) => {
+export const createArchive = async (dto: CreateArchiveDto) => {
     try {
         const {data} = await $host.post('archives/create', dto)
         return data
@@ -10,7 +10,7 @@ const createArchive = async (dto: CreateArchiveDto) => {
     }
 }
 
-const getAll = async () => {
+export const getAllArchives = async () => {
     try {
         const {data} = await $host.get('archives/')
         return data
@@ -44,12 +44,4 @@ const deleteArch = async (cellCode: string) => {
     } catch (error) {
         return null
     }
-}
-
-export default {
-    createArchive,
-    getAll,
-    getByCell,
-    update,
-    deleteArch
 }

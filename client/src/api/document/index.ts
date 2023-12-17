@@ -1,7 +1,7 @@
 import $host from "../interceptor"
 import { CreateDocumentDto } from "./document.dto"
 
-const createDocument = async (dto: CreateDocumentDto) => {
+export const createDocument = async (dto: CreateDocumentDto) => {
     try {
         const {data} = await $host.post('documents/create', dto)
         return data
@@ -10,7 +10,7 @@ const createDocument = async (dto: CreateDocumentDto) => {
     }
 }
 
-const getAll = async () => {
+export const getAllDoc = async () => {
     try {
         const {data} = await $host.get('documents/')
         return data
@@ -46,11 +46,4 @@ const deleteDocument = async(inventoryNumber: string) => {
     }
 }
 
-export default {
-    createDocument,
-    getAll,
-    getByInventoryNumber,
-    update,
-    deleteDocument
-}
 
