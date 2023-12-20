@@ -20,7 +20,7 @@ export const getAllArchives = async () => {
     }
 }
 
-const getByCell = async (cellCode: string) => {
+export const getByCell = async (cellCode: string) => {
     try {
         const {data} = await $host.get(`archives/${cellCode}`)
         return data
