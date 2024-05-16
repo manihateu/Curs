@@ -14,6 +14,9 @@ import { SubscriberModule } from './subscriber/subscriber.module';
 import { Archive } from './entities/archive.entity';
 import { Document } from './entities/document.entity';
 import { Subscriber } from './entities/subscriber.entity';
+import { UserModule } from './user/user.module';
+import { TokenModule } from './token/token.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -28,6 +31,9 @@ import { Subscriber } from './entities/subscriber.entity';
     ArchiveModule,
     DocumentModule,
     SubscriberModule,
+    UserModule,
+    TokenModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
