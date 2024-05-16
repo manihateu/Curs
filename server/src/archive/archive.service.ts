@@ -1,15 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Archive } from '../entities/archive.entity';
 import { Document } from 'src/entities/document.entity';
+import { TokenService } from 'src/token/token.service';
 
 @Injectable()
 export class ArchiveService {
   constructor(
     @InjectRepository(Archive)
     private archiveRepository: Repository<Archive>,
-
+    private readonly tokenService: TokenService
   ) {}
 
   async createArchiveRecord({shelf, shelfNumber, cell, cellCode, filling}): Promise<Archive> {
@@ -30,13 +31,17 @@ export class ArchiveService {
     return archiveRecord;
   }
 
-  async updateArchiveRecord(cellCode: string, updateData: Partial<Archive>): Promise<Archive> {
+  async updateArchiveRecord(cellCode: string, updateData: Partial<Archive>, token: string): Promise<Archive> {
+    const existUser = await this.tokenService.getUserFromToken(token)
+    if (existUser.role == 'СОТРУДНИК') throw new HttpException('у вас нет прав', 403)
     const archiveRecord = await this.getArchiveRecordByCellCode(cellCode);
     this.archiveRepository.merge(archiveRecord, updateData);
     return this.archiveRepository.save(archiveRecord);
   }
 
-  async deleteArchiveRecord(cellCode: string): Promise<void> {
+  async deleteArchiveRecord(cellCode: string, token: string): Promise<void> {
+    const existUser = await this.tokenService.getUserFromToken(token)
+    if (existUser.role == 'СОТРУДНИК') throw new HttpException('у вас нет прав', 403)
     const archiveRecord = await this.getArchiveRecordByCellCode(cellCode);
     await this.archiveRepository.remove(archiveRecord);
   }

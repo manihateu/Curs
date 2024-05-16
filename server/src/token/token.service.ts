@@ -7,7 +7,7 @@ import { User } from 'src/entities/user.entity';
 export class TokenService {
   constructor(private readonly jwtService: JwtService) {}
 
-  async generateJwtToken(user: User) {
+  async generateJwtToken(user: Partial<User>) {
     const payload = { user };
     return this.jwtService.sign(payload, {
       secret: process.env.SECRET_KEY,
@@ -15,7 +15,7 @@ export class TokenService {
     });
   }
 
-  async checkToken(token: string) {
+  async checkToken(token: string): Promise<Partial<User>> {
     return await this.jwtService.verify(token, {
       secret: process.env.SECRET_KEY,
     });
@@ -26,11 +26,11 @@ export class TokenService {
     return await bcrypt.hash(password, salt);
   }
 
-  async getUserFromToken(token: string) {
+  async getUserFromToken(token: string): Promise<Partial<User>> {
     if (!token) throw new HttpException('Not auth', HttpStatus.UNAUTHORIZED);
     try {
       let user = await this.checkToken(token);
-      return user.user;
+      return user;
     } catch (error) {
       throw new HttpException(
         'Error to validate token' + error,
